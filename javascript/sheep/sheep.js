@@ -49,9 +49,6 @@ function sheep(option = {}) {
       this.checkCover(); //元素是否被覆盖监听创建
       this.batch(); //批量生成
       config.afresh.onclick = this.reorganize.bind(this); //洗牌道具绑定
-      window.onload = () => {
-        config.box.style.opacity = "1";
-      };
     },
     //生成随机坐标
     randomSeat() {
