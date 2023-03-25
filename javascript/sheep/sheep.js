@@ -110,6 +110,7 @@ function sheep(option = {}) {
       that = e.target;
       that.style.zIndex = 199; //防止沿途覆盖导致闪烁
       config.isCover.unobserve(that); //移除可见监听
+      that.onclick = null; //移除点击事件
       that.style.left = config.palingLastX + "px"; //物品移动到放置栏
       that.style.top = config.palingY + "px";
       config.palingLastX += config.itemWidth; //放置栏下一个物品放置的坐标更新
