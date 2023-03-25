@@ -7,7 +7,7 @@ function sheep(option = {}) {
     limits: { MinX: 0, MinY: 0 }, //场地坐标
     itemWidth: 0, //物品宽
     itemHeight: 0, //物品高
-    quantity: 9, //每一类物品的数量
+    quantity: 12, //每一类物品的数量
     type: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"], //物品类别类名
     isCover: null, //是否被覆盖
     noCover: [], //没有被覆盖的
