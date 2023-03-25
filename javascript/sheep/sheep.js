@@ -1,24 +1,24 @@
 function sheep(option = {}) {
   const config = {
-    box: document.querySelector(".sheep"),
-    plat: null, //生成场地
+    box: ".sheep", //外壳
+    plat: "ul", //生成场地
     platWidth: 0, //场地宽
     platHeight: 0, //场地高
     limits: { MinX: 0, MinY: 0 }, //场地坐标
     itemWidth: 0, //物品宽
     itemHeight: 0, //物品高
-    quantity: 12, //每一类物品的数量
+    quantity: 9, //每一类物品的数量
     type: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"], //物品类别类名
     isCover: null, //是否被覆盖
     noCover: [], //没有被覆盖的
-    paling: null, //放置栏
+    paling: ".paling", //放置栏
     palingX: 0, //放置栏坐标X
     palingY: 0, //放置栏坐标Y
     palingAmount: 7, //放置栏可放置数量
     palingLastX: 0, //放置栏下一个物品放置的坐标
     palingInfo: [], //在放置栏内的物品组
     classObj: {}, //统计放置栏物品的同类型数量
-    afresh: null, //洗牌道具
+    afresh: ".reorganize", //洗牌道具
     transitionDuration: 0, //过渡时间
     ...option, //参数合并
   };
@@ -26,9 +26,10 @@ function sheep(option = {}) {
   const method = {
     //初始化
     init() {
-      config.plat = config.plat || config.box.querySelector("ul"); //获取场地元素
-      config.paling = config.paling || config.box.querySelector(".paling"); //获取放置栏元素
-      config.afresh = config.afresh || config.box.querySelector(".reorganize"); //获取道具元素
+      config.box = document.querySelector(config.box); //获取外壳
+      config.plat = config.box.querySelector(config.plat); //获取场地元素
+      config.paling = config.box.querySelector(config.paling); //获取放置栏元素
+      config.afresh = config.box.querySelector(config.afresh); //获取道具元素
       config.platWidth = config.plat.offsetWidth; //场地宽
       config.platHeight = config.plat.offsetHeight; //场地高
       config.limits.MinX = config.plat.offsetLeft; //场地坐标X
@@ -49,37 +50,6 @@ function sheep(option = {}) {
       this.checkCover(); //元素是否被覆盖监听创建
       this.batch(); //批量生成
       config.afresh.onclick = this.reorganize.bind(this); //洗牌道具绑定
-    },
-    //生成随机坐标
-    randomSeat() {
-      let x = Math.round(
-        Math.random() * (config.platWidth - config.itemWidth) + config.limits.MinX
-      );
-      let y = Math.round(
-        Math.random() * (config.platHeight - config.itemHeight) + config.limits.MinY
-      );
-      let z = Math.round(Math.random() * 99 + 1);
-      return { x, y, z };
-    },
-    //生成单个项
-    createItem(className) {
-      //生成随机坐标
-      let seat = this.randomSeat();
-      let li = document.createElement("li"); //创建
-      li.style.left = seat.x + "px"; //定位
-      li.style.top = seat.y + "px";
-      li.style.zIndex = seat.z;
-      li.className = className; //分类
-      config.plat.appendChild(li); //生成li
-      config.isCover.observe(li); //开始监听元素是否被覆盖
-    },
-    //批量生成
-    batch() {
-      config.type.forEach(item => {
-        for (let i = 0, len = config.quantity; i < len; i++) {
-          this.createItem(item); //遍历图片类型，每种图片各生成quantity个
-        }
-      });
     },
     //覆盖监听
     checkCover() {
@@ -109,17 +79,52 @@ function sheep(option = {}) {
         }
       );
     },
+    //批量生成
+    batch() {
+      config.type.forEach(item => {
+        for (let i = 0, len = config.quantity; i < len; i++) {
+          this.createItem(item); //遍历图片类型，每种图片各生成quantity个
+        }
+      });
+    },
+    //生成单个项
+    createItem(className) {
+      //生成随机坐标
+      let seat = this.randomSeat();
+      let li = document.createElement("li"); //创建
+      li.style.left = seat.x + "px"; //定位
+      li.style.top = seat.y + "px";
+      li.style.zIndex = seat.z;
+      li.className = className; //分类
+      config.plat.appendChild(li); //生成li
+      config.isCover.observe(li); //开始监听元素是否被覆盖
+    },
+    //生成随机坐标
+    randomSeat() {
+      let x = Math.round(
+        Math.random() * (config.platWidth - config.itemWidth) + config.limits.MinX
+      );
+      let y = Math.round(
+        Math.random() * (config.platHeight - config.itemHeight) + config.limits.MinY
+      );
+      let z = Math.round(Math.random() * 99 + 1);
+      return { x, y, z };
+    },
     //物品点击放置
     clickPick(e) {
       that = e.target;
+
       that.style.zIndex = 199; //防止沿途覆盖导致闪烁
+
       config.isCover.unobserve(that); //移除可见监听
       that.onclick = null; //移除点击事件
+
       that.style.left = config.palingLastX + "px"; //物品移动到放置栏
       that.style.top = config.palingY + "px";
+
       config.palingLastX += config.itemWidth; //放置栏下一个物品放置的坐标更新
-      //放置栏数组物品添加
-      config.palingInfo.push(that);
+      config.palingInfo.push(that); //放置栏数组物品添加
+
       let className = that.className;
       //若放置栏有当前种类物品，则classObj内同类型计数+1
       if (config.classObj[className]) {
@@ -131,6 +136,7 @@ function sheep(option = {}) {
       } else {
         config.classObj[className] = 1; //不存在则添加新计数
       }
+
       //是否淘汰
       setTimeout(() => {
         if (config.palingInfo.length >= config.palingAmount) {
@@ -142,7 +148,7 @@ function sheep(option = {}) {
     eliminate(className) {
       let keepItem = []; //存放不需要移除的物品
       //遍历放置栏
-      config.palingInfo.forEach((item, index) => {
+      config.palingInfo.forEach(item => {
         //若当前项类名不同于需要移除的类名，添加到keepItem数组
         if (item.className != className) {
           keepItem.push(item);
@@ -154,6 +160,7 @@ function sheep(option = {}) {
         }
       });
       config.palingInfo = keepItem; //替换
+
       //消除后,前空位补齐
       if (config.palingInfo.length) {
         setTimeout(() => {
@@ -166,6 +173,7 @@ function sheep(option = {}) {
       } else {
         config.palingLastX = config.palingX;
       }
+
       //判断是否获胜
       setTimeout(() => {
         if (config.plat.querySelectorAll("li").length === 1) {
@@ -207,3 +215,4 @@ function sheep(option = {}) {
   };
   method.init();
 }
+
