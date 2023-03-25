@@ -89,11 +89,15 @@ function sheep(option = {}) {
           entries.forEach(item => {
             // 判断物品是否被覆盖，true为不被覆盖，false为被覆盖
             if (item.isVisible) {
-              item.target.classList.remove("mask"); //移除蒙层
+              item.target.style[
+                "background-image"
+              ] = `url(images/sheep/${item.target.className}.gif)`;
               item.target.onclick = this.clickPick.bind(this); //添加点击事件
               item.target.style.zIndex = 200; //置顶
             } else {
-              item.target.classList.add("mask"); //添加蒙层
+              item.target.style[
+                "background-image"
+              ] = `url(images/sheep/${item.target.className}s.gif)`;
               item.target.onclick = null; //移除点击事件
             }
           });
