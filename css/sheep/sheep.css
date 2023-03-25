@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: rgb(195, 255, 139);
+}
+ul {
+  list-style: none;
+}
+ul {
+  width: 400px;
+  height: 400px;
+  margin: 50px auto;
+}
+li {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  transition: all 0.3s;
+  box-sizing: border-box;
+  border: 1px solid #333;
+  border-bottom: 1px solid #aaa;
+  border-radius: 5px;
+  box-shadow: 0.5px 6px 0 0 rgb(113, 162, 21);
+}
+li.mask {
+  box-shadow: 0.5px 6px 0 0 rgba(67, 95, 13);
+}
+.paling {
+  position: absolute;
+  top: 520px;
+  left: 50%;
+  margin-left: -175px;
+  width: 350px;
+  height: 56px;
+  background-color: rgb(150, 90, 28);
+  border-radius: 5px;
+}
+.none {
+  opacity: 0;
+}
+.reorganize {
+  width: 80px;
+  height: 50px;
+  position: absolute;
+  background-image: url(../../images/sheep/re.jpg);
+  background-color: #23a4ff;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 5px;
+  background-size: contain;
+  box-shadow: 0 6px 0 0 #117ec9;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+}
+h1 {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+}
+
+/*  abcdefghijklmnop */
+/* 依次为a叉子、b剪刀、c刷子、d稻草、e木桩、f白菜、g牛奶、h柴火、i紫色毛线球、j玉米、k水桶、l手套、m小草、n胡萝卜、o铃铛、p白色毛球 */
+.a {
+  background-image: url(../../images/sheep/1.gif);
+}
+.a.mask {
+  background-image: url(../../images/sheep/1s.gif);
+}
+.b {
+  background-image: url(../../images/sheep/2.gif);
+}
+.b.mask {
+  background-image: url(../../images/sheep/2s.gif);
+}
+.c {
+  background-image: url(../../images/sheep/3.gif);
+}
+.c.mask {
+  background-image: url(../../images/sheep/3s.gif);
+}
+.d {
+  background-image: url(../../images/sheep/4.gif);
+}
+.d.mask {
+  background-image: url(../../images/sheep/4s.gif);
+}
+.e {
+  background-image: url(../../images/sheep/5.gif);
+}
+.e.mask {
+  background-image: url(../../images/sheep/5s.gif);
+}
+.f {
+  background-image: url(../../images/sheep/6.gif);
+}
+.f.mask {
+  background-image: url(../../images/sheep/6s.gif);
+}
+.g {
+  background-image: url(../../images/sheep/7.gif);
+}
+.g.mask {
+  background-image: url(../../images/sheep/7s.gif);
+}
+.h {
+  background-image: url(../../images/sheep/8.gif);
+}
+.h.mask {
+  background-image: url(../../images/sheep/8s.gif);
+}
+.i {
+  background-image: url(../../images/sheep/9.gif);
+}
+.i.mask {
+  background-image: url(../../images/sheep/9s.gif);
+}
+.j {
+  background-image: url(../../images/sheep/10.gif);
+}
+.j.mask {
+  background-image: url(../../images/sheep/10s.gif);
+}
+.k {
+  background-image: url(../../images/sheep/11.gif);
+}
+.k.mask {
+  background-image: url(../../images/sheep/11s.gif);
+}
+.l {
+  background-image: url(../../images/sheep/12.gif);
+}
+.l.mask {
+  background-image: url(../../images/sheep/12s.gif);
+}
+.m {
+  background-image: url(../../images/sheep/13.gif);
+}
+.m.mask {
+  background-image: url(../../images/sheep/13s.gif);
+}
+.n {
+  background-image: url(../../images/sheep/14.gif);
+}
+.n.mask {
+  background-image: url(../../images/sheep/14s.gif);
+}
+.o {
+  background-image: url(../../images/sheep/15.gif);
+}
+.o.mask {
+  background-image: url(../../images/sheep/15s.gif);
+}
+.p {
+  background-image: url(../../images/sheep/16.gif);
+}
+.p.mask {
+  background-image: url(../../images/sheep/16s.gif);
+}
