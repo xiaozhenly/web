@@ -204,7 +204,7 @@ function sheep(option = {}) {
           let seat = this.randomSeat(); //随机位置生成
           item.style.left = seat.x + "px";
           item.style.top = seat.y + "px";
-          item.style.top = seat.z;
+          item.style.zIndex = seat.z;
         }
       });
     },
